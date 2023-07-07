@@ -30,9 +30,15 @@ kotlin {
             dependencies {
                 implementation(compose.runtime)
                 implementation(compose.foundation)
-                implementation(compose.material)
+                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+                implementation(compose.material3)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
+                implementation(compose.ui)
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
+                implementation("io.ktor:ktor-client-core:2.3.2")
+                implementation("media.kamel:kamel-image:0.6.0")
+                api("io.github.qdsfdhvh:image-loader:1.5.3")
             }
         }
         val androidMain by getting {
@@ -73,4 +79,12 @@ android {
     kotlin {
         jvmToolchain(11)
     }
+
+    sourceSets["main"].res.srcDirs(
+        "src/commonMain/resources",
+        "src/androidMain/resources"
+    )
+}
+dependencies {
+    implementation("androidx.compose.ui:ui:1.4.3")
 }
